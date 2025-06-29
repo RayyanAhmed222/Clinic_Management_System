@@ -1,0 +1,84 @@
+﻿@model User
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Admin Register";
+    ViewData["HideHeader"] = true;
+}
+
+<style>
+    .register-wrapper {
+        max-width: 450px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+        .register-wrapper h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: #343a40;
+        }
+
+    .form-group label {
+        font-weight: 600;
+    }
+
+    .form-control {
+        border-radius: 6px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .login-link {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+        .login-link a {
+            font-weight: 500;
+            text-decoration: none;
+        }
+</style>
+
+<div class="register-wrapper">
+    <h2>@ViewData["Title"]</h2>
+
+    <form asp-action="Register" method="post">
+        <div class="form-group">
+            <label for="FirstName">First Name</label>
+            <input type="text" class="form-control" id="FirstName" name="FirstName" required />
+        </div>
+
+        <div class="form-group">
+            <label for="LastName">Last Name</label>
+            <input type="text" class="form-control" id="LastName" name="LastName" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email" class="form-control" id="Email" name="Email" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Password">Password</label>
+            <input type="password" class="form-control" id="Password" name="Password" required />
+        </div>
+
+        <input type="hidden" name="RoleId" value="1" />
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+
+    <div class="login-link">
+        <p>Already have an account? <a href="@Url.Action("Login", "Home")">Login here</a>.</p>
+    </div>
+</div>

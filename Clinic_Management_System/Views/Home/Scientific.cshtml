@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Scientific";
+}
+
+<section class="product section" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+
+            <!-- Filters -->
+            <div class="col-md-3">
+                <form asp-controller="Home" asp-action="Scientific" method="get">
+                    <div class="mb-4">
+                        <h5 class="text-dark">Scientific Category</h5>
+                        <select class="form-control" name="catId">
+                            <option value="">-- Select Scientific Category --</option>
+                            @foreach (Clinic_Management_System.Models.ScientificCategory item in ViewBag.ScientificCategories)
+                            {
+                                <option value="@item.SciCatId">@item.SciCatName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- ✅ Brand Filter -->
+                    <div class="mb-4">
+                        <h5 class="text-dark">Filter by Seller Brand</h5>
+                        <select class="form-control" name="medBrandName">
+                            <option value="">-- Select Brand --</option>
+                            @foreach (string brand in ViewBag.BrandNames)
+                            {
+                                <option value="@brand">@brand</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="text-dark">Stock Status</h5>
+                        <select class="form-control" name="stockStatus">
+                            <option value="">-- Select Stock Status --</option>
+                            <option value="Available">Available</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn text-white w-100" style="background-color: #3E8DA8;">Apply Filters</button>
+                    <a class="btn btn-secondary w-100 mt-2" asp-controller="Home" asp-action="Scientific">Clear Filters</a>
+                </form>
+                <h6 style="color: black; margin-top: 20px;">Give our Products a FeedBack!</h6>
+                <a href="@Url.Action("AddFeedback", "Home")"><button class="btn text-white w-100" style="background-color: #3E8DA8;">FeedBack</button></a>
+            </div>
+
+            <!-- Products -->
+            <div class="col-md-9">
+                <div class="row">
+                    @if (ViewBag.AllScientific != null)
+                    {
+                        foreach (var item in ViewBag.AllScientific)
+                        {
+                            <div class="col-md-6 col-lg-4 my-4">
+                                <div class="card shadow-sm h-100">
+                                    <img class="card-img-top" src="~/@item.Image" alt="@item.Name" style="height: 150px; object-fit: contain;" />
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">@item.Name</h5>
+                                        <p class="card-text text-muted">@item.StockStatus</p>
+                                        <p class="card-text price text-primary fw-bold">$@item.Price</p>
+                                    </div>
+                                    <div class="card-footer bg-white text-center">
+                                        <a asp-controller="Home"
+                                           asp-action="SingleScientific"
+                                           asp-route-id="@item.Id"
+                                           asp-route-type="@item.Type"
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="tf-ion-android-cart"></i> Buy Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No scientific items found.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

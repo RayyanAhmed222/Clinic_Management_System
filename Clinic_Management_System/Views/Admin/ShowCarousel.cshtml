@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Clinic_Management_System.Models.Carousel>
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h1 style="margin: 50px;">ShowCarousel</h1>
+
+<p>
+    <a href="@Url.Action("AddCarousel", "Admin")"
+       style="display: inline-block; padding: 10px 20px; background-color: #343a40; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background-color 0.3s ease;">
+        Add More
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CarouselImg)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    <img src="~/@item.CarouselImg" width="150" height="150" />
+            </td>
+            <td>
+                    <a asp-controller="Admin" asp-action="UpdateCarousel" asp-route-id="@item.CarouselId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CarouselId">Details</a> |
+                    <a asp-controller="Admin" asp-action="DelCarousel" asp-route-id="@item.CarouselId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

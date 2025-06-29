@@ -1,0 +1,70 @@
+﻿<section class="product section" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <form asp-controller="Home" asp-action="Practical" method="get">
+                    <div class="mb-4">
+                        <h5 class="text-dark">Filter by Faculty</h5>
+                        <select class="form-control" name="facultyId">
+                            <option value="">-- Select Faculty --</option>
+                            @foreach (var fac in ViewBag.FacultyList)
+                            {
+                                <option value="@fac.FacultyId">@fac.FacultyName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="text-dark">Filter by Category</h5>
+                        <select class="form-control" name="categoryId">
+                            <option value="">-- Select Category --</option>
+                            @foreach (var cat in ViewBag.CategoryList)
+                            {
+                                <option value="@cat.PracCatId">@cat.PracCatName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="text-dark">Stock Status</h5>
+                        <select class="form-control" name="stockStatus">
+                            <option value="">-- Select Stock Status --</option>
+                            <option value="Available">Available</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn text-white w-100" style="background-color: #3E8DA8;">Apply Filters</button>
+                    <a class="btn btn-secondary w-100 mt-2" asp-controller="Home" asp-action="Practical">Clear Filters</a>
+                </form>
+                <h6 style="color: black; margin-top: 20px;">Give our Products a FeedBack!</h6>
+                <a href="@Url.Action("AddFeedback", "Home")"><button class="btn text-white w-100" style="background-color: #3E8DA8;">FeedBack</button></a>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row">
+                    @foreach (Clinic_Management_System.Models.Practical item in ViewBag.Practicals)
+                    {
+                        <div class="col-md-6 col-lg-3 my-4">
+                            <div class="card shadow-sm h-100">
+                                <img class="card-img-top" src="~/@item.PracImg" alt="@item.PracName" style="height: 200px; object-fit: contain;" />
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">@item.PracName</h5>
+                                    <p>@item.PracticalFacultyNavigation.FacultyName</p>
+                                    <p>@item.PracticalCategoryNavigation.PracCatName</p>
+                                    <p>@item.PracStockstatus</p>
+                                    <p class="text-primary fw-bold">$@item.PracPrice</p>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a asp-controller="Home" asp-action="SinglePractical" asp-route-id="@item.PracId" class="btn btn-outline-secondary">Buy Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

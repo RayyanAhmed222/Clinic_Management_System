@@ -1,0 +1,57 @@
+﻿<section class="product section" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <form asp-controller="Home" asp-action="Seminar" method="get">
+                    <div class="mb-4">
+                        <h5 class="text-dark">Filter by Faculty Category</h5>
+                        <select class="form-control" name="SemId">
+                            <option value="">-- Select Faculty Category --</option>
+                            @foreach (Clinic_Management_System.Models.Faculty item in ViewBag.cat)
+                            {
+                                <option value="@item.FacultyId">@item.FacultyName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="text-dark">Stock Status</h5>
+                        <select class="form-control" name="stockStatus">
+                            <option value="">-- Select Stock Status --</option>
+                            <option value="Available">Available</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn text-white w-100" style="background-color: #3E8DA8;">Apply Filters</button>
+                    <a class="btn btn-secondary w-100 mt-2" asp-controller="Home" asp-action="Seminar">Clear Filters</a>
+                </form>
+                <h6 style="color: black; margin-top: 20px;">Give our Products a FeedBack!</h6>
+                <a href="@Url.Action("AddFeedback", "Home")"><button class="btn text-white w-100" style="background-color: #3E8DA8;">FeedBack</button></a>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row">
+                    @foreach (Clinic_Management_System.Models.Seminar item in ViewBag.med)
+                    {
+                        <div class="col-md-6 col-lg-3 my-4">
+                            <div class="card shadow-sm h-100">
+                                <img class="card-img-top" src="~/@item.SemImg" alt="@item.SemName" style="height: 200px; object-fit: contain;" />
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">@item.SemName</h5>
+                                    <p class="card-text text-muted">@item.SemShortDescription</p>
+                                    <p class="card-text text-muted">@item.SemFacultyNavigation.FacultyName</p>
+                                    <p class="card-text price text-primary fw-bold">$@item.SemPrice</p>
+                                </div>
+                                <div class="card-footer bg-white text-center">
+                                    <a asp-controller="Home" asp-action="SingleSeminar" asp-route-id="@item.SemId" class="btn btn-outline-secondary">Buy Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

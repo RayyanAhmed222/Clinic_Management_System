@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Clinic_Management_System.Models.MedicineOrder>
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+<h1 style="margin: 50px;">ShowOrders</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicineId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionScreenshot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedicineId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserAddress)
+                </td>
+                <td>
+                    <img src="~/@item.TransactionScreenshot" width="150" height="150" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    <a asp-controller="Admin" asp-action="DelMedicineOrder" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

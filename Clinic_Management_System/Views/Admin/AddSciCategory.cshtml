@@ -1,0 +1,74 @@
+﻿@model Clinic_Management_System.Models.ScientificCategory
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Add Scientific Category";
+}
+
+<style>
+    .category-form-wrapper {
+        max-width: 500px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+        .category-form-wrapper h1,
+        .category-form-wrapper h4 {
+            text-align: center;
+            font-weight: 700;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+    .form-group label,
+    label.control-label {
+        font-weight: 600;
+    }
+
+    .form-control {
+        border-radius: 6px;
+        margin-bottom: 15px;
+        padding: 8px 12px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+    .back-link {
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
+
+<div class="category-form-wrapper">
+    <h1>Add Scientific Category</h1>
+    <h4>Scientific Category Form</h4>
+    <hr />
+
+    <form asp-action="AddSciCategory" method="post" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group">
+            <label asp-for="SciCatName" class="control-label">Category Name</label>
+            <input asp-for="SciCatName" class="form-control" placeholder="Enter Category Name" />
+            <span asp-validation-for="SciCatName" class="text-danger"></span>
+        </div>
+
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </form>
+</div>
+
+<div class="back-link">
+    <a asp-action="Index" class="btn btn-link mt-3">Back to List</a>
+</div>

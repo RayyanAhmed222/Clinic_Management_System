@@ -1,0 +1,32 @@
+﻿@model Clinic_Management_System.Models.AddSciViewModel
+
+@{
+    Layout = "~/Views/Shared/_Seller.cshtml";
+}
+
+<h1>Update Scientific Category</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateScientificCategory" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="SelectedCategory.SciCatId" />
+
+            <div class="form-group">
+                <label asp-for="SelectedCategory.SciCatName" class="control-label"></label>
+                <input asp-for="SelectedCategory.SciCatName" class="form-control" />
+                <span asp-validation-for="SelectedCategory.SciCatName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ShowScientificCategory">Back to List</a>
+</div>

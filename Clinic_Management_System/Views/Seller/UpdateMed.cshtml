@@ -1,0 +1,65 @@
+﻿@model Clinic_Management_System.Models.AddSellMedViewModel
+
+@{
+    Layout = "~/Views/Shared/_Seller.cshtml";
+}
+<h1>UpdateMed</h1>
+
+<h4>SellMedicinesInfo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateMed" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="sellmedicineinfo.MedId" />
+            <div class="form-group">
+                <label asp-for="sellmedicineinfo.MedName" class="control-label"></label>
+                <input asp-for="sellmedicineinfo.MedName" class="form-control" />
+                <span asp-validation-for="sellmedicineinfo.MedName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellmedicineinfo.MedBrandName" class="control-label"></label>
+                <input asp-for="sellmedicineinfo.MedBrandName" class="form-control" />
+                <span asp-validation-for="sellmedicineinfo.MedBrandName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellmedicineinfo.MedDescription" class="control-label"></label>
+                <input asp-for="sellmedicineinfo.MedDescription" class="form-control" />
+                <span asp-validation-for="sellmedicineinfo.MedDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellmedicineinfo.MedImage" class="control-label"></label>
+                <input type="file" name="img" class="form-control" />
+                <span asp-validation-for="sellmedicineinfo.MedImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellmedicineinfo.MedPrice" class="control-label"></label>
+                <input asp-for="sellmedicineinfo.MedPrice" class="form-control" />
+                <span asp-validation-for="sellmedicineinfo.MedPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellmedicineinfo.StockStatus" class="control-label"></label>
+                <input asp-for="sellmedicineinfo.StockStatus" class="form-control" />
+                <span asp-validation-for="sellmedicineinfo.StockStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellmedicineinfo.MedCat" class="control-label"></label>
+                <select asp-for="sellmedicineinfo.MedCat" class="form-control" asp-items="ViewBag.MedCat">
+                    @foreach (var item in Model.medcategory)
+                    {
+                        <option value="@item.MedCatId">@item.MedCatName</option>
+                    }
+                </select>
+                <span asp-validation-for="sellmedicineinfo.MedCat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,38 @@
+﻿@using Clinic_Management_System.Models
+@{
+    ViewData["Title"] = "Practical Details";
+    var items = ViewBag.Prac as List<Practical>;
+}
+
+@if (items != null && items.Any())
+{
+    foreach (var item in items)
+    {
+        <div style="margin-top: 200px;" class="single-product">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/@item.PracImg" alt="@item.PracName" class="img-fluid" />
+                </div>
+                <div class="col-md-6">
+                    <h2>@item.PracName</h2>
+                    <p><strong>Description:</strong> @item.PracDescription</p>
+                    <p><strong>Date & Time:</strong> @item.PracDatetime</p>
+                    <p><strong>Faculty:</strong> @item.PracticalFacultyNavigation?.FacultyName</p>
+                    <p><strong>Category:</strong> @item.PracticalCategoryNavigation?.PracCatName</p>
+                    <p><strong>Duration:</strong> @item.ParcDuration</p>
+                    <p><strong>Status:</strong> @item.PracStockstatus</p>
+                    <p><strong>Price:</strong> @item.PracPrice?.ToString("C")</p>
+                    <form asp-action="AddToCart" method="post">
+                        <input type="hidden" name="id" value="@item.PracId" />
+                        <input type="number" name="quantity" value="1" min="1" class="form-control w-25" />
+                        <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No practical details found.</p>
+}

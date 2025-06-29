@@ -1,0 +1,66 @@
+﻿@using Clinic_Management_System.Models
+@{
+    ViewData["Title"] = "Medicine Details";
+    var type = ViewBag.Type as string;
+}
+
+@if (type == "Normal")
+{
+    var items = ViewBag.pro as List<MedicinesInfo>;
+    if (items != null && items.Count > 0)
+    {
+        foreach (var item in items)
+        {
+            <div style="margin-top: 200px;" class="single-product">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="~/@item.MedImage" alt="@item.MedName" class="img-fluid" />
+                    </div>
+                    <div class="col-md-6">
+                        <h2>@item.MedName</h2>
+                        <p><strong>Description:</strong> @item.MedDescription</p>
+                        <p><strong>Category:</strong> @item.MedCatNavigation?.MedCatName</p>
+                        <p><strong>Stock Status:</strong> @item.StockStatus</p>
+                        <p><strong>Price:</strong> $@item.MedPrice</p>
+                        <a asp-action="MedOrderForm" asp-route-id="@item.MedId" asp-route-type="Normal" class="btn btn-primary mt-2">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-danger">Medicine not found.</p>
+    }
+}
+else if (type == "Sell")
+{
+    var item = ViewBag.sellPro as SellMedicinesInfo;
+    if (item != null)
+    {
+        <div style="margin-top: 200px;" class="single-product">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/@item.MedImage" alt="@item.MedName" class="img-fluid" />
+                </div>
+                <div class="col-md-6">
+                    <h2>@item.MedName</h2>
+                    <p><strong>Brand:</strong> @item.MedBrandName</p>
+                    <p><strong>Description:</strong> @item.MedDescription</p>
+                    <p><strong>Category:</strong> @item.MedCatNavigation?.MedCatName</p>
+                    <p><strong>Stock Status:</strong> @item.StockStatus</p>
+                    <p><strong>Price:</strong> $@item.MedPrice</p>
+                    <a asp-action="MedOrderForm" asp-route-id="@item.MedId" asp-route-type="Sell" class="btn btn-primary mt-2">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="text-danger">Sell medicine not found.</p>
+    }
+}
+else
+{
+    <p class="text-warning">No medicine type specified.</p>
+}

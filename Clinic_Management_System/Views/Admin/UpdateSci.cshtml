@@ -1,0 +1,165 @@
+﻿@model Clinic_Management_System.Models.AddSciViewModel
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Update Scientific Info";
+}
+
+<style>
+    .sci-form-wrapper {
+        max-width: 480px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .sci-form-wrapper h1,
+    .sci-form-wrapper h4 {
+        text-align: center;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 12px;
+    }
+
+    hr {
+        margin-bottom: 25px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+        color: #34495e;
+    }
+
+    .form-control,
+    .form-select {
+        width: 100%;
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0,123,255,0.5);
+    }
+
+    input[type="file"].form-control {
+        padding: 6px 12px;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+        color: #e74c3c;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: 6px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .back-link {
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .back-link a {
+        color: #007bff;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="sci-form-wrapper">
+    <h1>Update Scientific Info</h1>
+    <h4>ScientificInfo</h4>
+    <hr />
+
+    <form asp-action="UpdateSci" method="post" enctype="multipart/form-data" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <input type="hidden" asp-for="scientificinfo.ScientificId" />
+
+        <div class="form-group">
+            <label asp-for="scientificinfo.ScientificName"></label>
+            <input asp-for="scientificinfo.ScientificName" class="form-control" />
+            <span asp-validation-for="scientificinfo.ScientificName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="scientificinfo.ScientificDescription"></label>
+            <input asp-for="scientificinfo.ScientificDescription" class="form-control" />
+            <span asp-validation-for="scientificinfo.ScientificDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="scientificinfo.ScientificImage"></label>
+            <input type="file" name="img" class="form-control" />
+            <span asp-validation-for="scientificinfo.ScientificImage" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="scientificinfo.ScientificPrice"></label>
+            <input asp-for="scientificinfo.ScientificPrice" class="form-control" />
+            <span asp-validation-for="scientificinfo.ScientificPrice" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="scientificinfo.StockStatus">Stock Status</label>
+            <select asp-for="scientificinfo.StockStatus" class="form-select">
+                <option value="Available">Available</option>
+                <option value="Out of Stock">Out of Stock</option>
+            </select>
+            <span asp-validation-for="scientificinfo.StockStatus" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="scientificinfo.ScientificCat"></label>
+            <select asp-for="scientificinfo.ScientificCat" class="form-control" asp-items="ViewBag.ScientificCat">
+                @foreach (var item in Model.SciCategoryList)
+                {
+                    <option value="@item.SciCatId">@item.SciCatName</option>
+                }
+            </select>
+            <span asp-validation-for="scientificinfo.ScientificCat" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div class="back-link">
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,69 @@
+﻿@model Clinic_Management_System.Models.AddSellSciViewModel
+
+@{
+    Layout = "~/Views/Shared/_Seller.cshtml";
+}
+sellscientificinfo.
+<h1>UpdateSci</h1>
+
+<h4>SellScientificInfo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateSci" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="sellscientificinfo.ScientificId" />
+            <div class="form-group">
+                <label asp-for="sellscientificinfo.ScientificName" class="control-label"></label>
+                <input asp-for="sellscientificinfo.ScientificName" class="form-control" />
+                <span asp-validation-for="sellscientificinfo.ScientificName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellscientificinfo.ScientificBrandName" class="control-label"></label>
+                <input asp-for="sellscientificinfo.ScientificBrandName" class="form-control" />
+                <span asp-validation-for="sellscientificinfo.ScientificBrandName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellscientificinfo.ScientificDescription" class="control-label"></label>
+                <input asp-for="sellscientificinfo.ScientificDescription" class="form-control" />
+                <span asp-validation-for="sellscientificinfo.ScientificDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellscientificinfo.ScientificImage" class="control-label"></label>
+                <input type="file" name="img" class="form-control" />
+                <span asp-validation-for="sellscientificinfo.ScientificImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellscientificinfo.ScientificPrice" class="control-label"></label>
+                <input asp-for="sellscientificinfo.ScientificPrice" class="form-control" />
+                <span asp-validation-for="sellscientificinfo.ScientificPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellscientificinfo.StockStatus" class="control-label"></label>
+                <input asp-for="sellscientificinfo.StockStatus" class="form-control" />
+                <span asp-validation-for="sellscientificinfo.StockStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sellscientificinfo.ScientificCat" class="control-label"></label>
+                <select asp-for="sellscientificinfo.ScientificCat" class="form-control" asp-items="ViewBag.ScientificCat">
+                    @foreach (var item in Model.SciCategoryList)
+                    {
+                        <option value="@item.SciCatId">@item.SciCatName</option>
+                    }
+                </select>
+                <span asp-validation-for="sellscientificinfo.ScientificCat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,147 @@
+﻿@model Clinic_Management_System.Models.AddParcViewModel
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Add Practical";
+}
+
+<style>
+    .practical-form-wrapper {
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+        .practical-form-wrapper h1,
+        .practical-form-wrapper h4 {
+            text-align: center;
+            font-weight: 700;
+            color: #343a40;
+            margin-bottom: 15px;
+        }
+
+    .form-group label,
+    label.control-label {
+        font-weight: 600;
+    }
+
+    .form-control {
+        border-radius: 6px;
+        margin-bottom: 15px;
+    }
+
+    select.form-control {
+        height: 38px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .back-link {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="practical-form-wrapper">
+    <h1>Add Practical</h1>
+    <h4>Practical Details</h4>
+    <hr />
+
+    <form asp-action="AddPractical" method="post" enctype="multipart/form-data" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracName" class="control-label">Practical Name</label>
+            <input asp-for="practical.PracName" class="form-control" placeholder="Enter practical name" />
+            <span asp-validation-for="practical.PracName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracImg" class="control-label">Upload Image</label>
+            <input type="file" name="img" class="form-control" />
+            <span asp-validation-for="practical.PracImg" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracShortDescription" class="control-label">Short Description</label>
+            <input asp-for="practical.PracShortDescription" class="form-control" placeholder="Brief description" />
+            <span asp-validation-for="practical.PracShortDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracDescription" class="control-label">Detailed Description</label>
+            <input asp-for="practical.PracDescription" class="form-control" placeholder="Detailed description" />
+            <span asp-validation-for="practical.PracDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracDatetime" class="control-label">Date & Time</label>
+            <input asp-for="practical.PracDatetime" class="form-control" type="datetime-local" />
+            <span asp-validation-for="practical.PracDatetime" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.ParcDuration" class="control-label">Duration (minutes)</label>
+            <input asp-for="practical.ParcDuration" class="form-control" type="number" min="1" placeholder="Duration in minutes" />
+            <span asp-validation-for="practical.ParcDuration" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracPrice" class="control-label">Price</label>
+            <input asp-for="practical.PracPrice" class="form-control" type="number" step="0.01" min="0" placeholder="Enter price" />
+            <span asp-validation-for="practical.PracPrice" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracStockstatus" class="control-label">Stock Status</label>
+            <select asp-for="practical.PracStockstatus" class="form-control" required>
+                <option value="">-- Select Status --</option>
+                <option value="Available">Available</option>
+                <option value="Out of Stock">Out of Stock</option>
+            </select>
+            <span asp-validation-for="practical.PracStockstatus" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracticalFaculty" class="control-label">Faculty</label>
+            <select asp-for="practical.PracticalFaculty" class="form-control" required>
+                <option value="">-- Select Faculty --</option>
+                @foreach (var item in Model.FacultyList)
+                {
+                    <option value="@item.FacultyId">@item.FacultyName</option>
+                }
+            </select>
+            <span asp-validation-for="practical.PracticalFaculty" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracticalCategory" class="control-label">Category</label>
+            <select asp-for="practical.PracticalCategory" class="form-control" required>
+                <option value="">-- Select Category --</option>
+                @foreach (var item in Model.pracList)
+                {
+                    <option value="@item.PracCatId">@item.PracCatName</option>
+                }
+            </select>
+            <span asp-validation-for="practical.PracticalCategory" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+
+    <div class="back-link">
+        <a asp-action="Index" class="btn btn-link mt-3">Back to List</a>
+    </div>
+</div>

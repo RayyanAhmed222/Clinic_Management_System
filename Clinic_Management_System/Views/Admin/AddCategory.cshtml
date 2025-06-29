@@ -1,0 +1,76 @@
+﻿@model Clinic_Management_System.Models.AddCategoryViewModel
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Add Category";
+}
+
+<style>
+    .category-form-wrapper {
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+        .category-form-wrapper h1,
+        .category-form-wrapper h4 {
+            text-align: center;
+            font-weight: 700;
+            color: #343a40;
+        }
+
+    .form-group label {
+        font-weight: 600;
+    }
+
+    .form-control {
+        border-radius: 6px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .back-link {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="category-form-wrapper">
+    <h1>Add Category</h1>
+    <h4 class="mb-4">Category Details</h4>
+    <hr />
+
+    <form asp-action="AddCategory" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group mb-3">
+            <label asp-for="category.CategorysName" class="control-label">Category Name</label>
+            <input asp-for="category.CategorysName" class="form-control" placeholder="Enter Category Name" />
+            <span asp-validation-for="category.CategorysName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="category.CategorysImg" class="control-label">Category Image</label>
+            <input type="file" name="img" class="form-control" />
+            <span asp-validation-for="category.CategorysImg" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Create</button>
+    </form>
+
+    <div class="back-link">
+        <a asp-action="Index" class="btn btn-link">Back to List</a>
+    </div>
+</div>

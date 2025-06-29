@@ -1,0 +1,133 @@
+﻿@model Clinic_Management_System.Models.AddLecViewModel
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Update Lecture";
+}
+
+<style>
+    .lecture-form-wrapper {
+        max-width: 480px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+        .lecture-form-wrapper h1,
+        .lecture-form-wrapper h4 {
+            text-align: center;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+    .form-group label,
+    .form-label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    .form-control, .form-select {
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+    .back-link {
+        margin-top: 25px;
+        text-align: center;
+    }
+</style>
+
+<div class="lecture-form-wrapper">
+    <h1>Update Lecture</h1>
+    <h4>Lecture Details</h4>
+    <hr />
+
+    <form asp-action="UpdateLec" method="post" enctype="multipart/form-data" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="lecture.LecId" />
+
+        <div class="form-group">
+            <label asp-for="lecture.LecName">Lecture Name</label>
+            <input asp-for="lecture.LecName" class="form-control" placeholder="Enter Lecture Name" />
+            <span asp-validation-for="lecture.LecName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="lecture.LecImg">Upload Image</label>
+            <input type="file" name="img" class="form-control" />
+            <span asp-validation-for="lecture.LecImg" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="lecture.LecShortDescription">Short Description</label>
+            <input asp-for="lecture.LecShortDescription" class="form-control" placeholder="Enter Short Description" />
+            <span asp-validation-for="lecture.LecShortDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="lecture.LecDescription">Description</label>
+            <input asp-for="lecture.LecDescription" class="form-control" placeholder="Enter Description" />
+            <span asp-validation-for="lecture.LecDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="lecture.LecDatetime">Date & Time</label>
+            <input asp-for="lecture.LecDatetime" class="form-control" placeholder="Enter Date & Time" />
+            <span asp-validation-for="lecture.LecDatetime" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="lecture.LecDuration">Duration</label>
+            <input asp-for="lecture.LecDuration" class="form-control" placeholder="Enter Duration" />
+            <span asp-validation-for="lecture.LecDuration" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="lecture.LecStockstatus" class="form-label">Stock Status</label>
+            <select asp-for="lecture.LecStockstatus" class="form-select">
+                <option value="Available" selected>Available</option>
+                <option value="Out of Stock">Out of Stock</option>
+            </select>
+            <span asp-validation-for="lecture.LecStockstatus" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="lecture.LecPrice">Price</label>
+            <input asp-for="lecture.LecPrice" class="form-control" placeholder="Enter Price" />
+            <span asp-validation-for="lecture.LecPrice" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="lecture.LecFaculty">Faculty</label>
+            <select asp-for="lecture.LecFaculty" class="form-select">
+                @foreach (var item in Model.facultyList)
+                {
+                    <option value="@item.FacultyId">@item.FacultyName</option>
+                }
+            </select>
+            <span asp-validation-for="lecture.LecFaculty" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+<div class="back-link">
+    <a asp-action="Index" class="btn btn-link">Back to List</a>
+</div>

@@ -1,0 +1,82 @@
+﻿@model User
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    .login-wrapper {
+        max-width: 400px;
+        margin: 60px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+        .login-wrapper h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: #343a40;
+        }
+
+    .form-group label {
+        font-weight: 600;
+    }
+
+    .form-control {
+        border-radius: 6px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .register-link {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+        .register-link a {
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+    .alert-danger {
+        max-width: 400px;
+        margin: 20px auto;
+    }
+</style>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<div class="login-wrapper">
+    <h2>@ViewData["Title"]</h2>
+
+    <form asp-action="Login" method="post">
+        <div class="form-group mb-3">
+            <label for="Email">Email</label>
+            <input type="email" class="form-control" asp-for="Email" required />
+        </div>
+        <div class="form-group mb-4">
+            <label for="Password">Password</label>
+            <input type="password" class="form-control" asp-for="Password" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+    <div class="register-link">
+        <p>Don't have an account? <a href="@Url.Action("Register", "Home")">Register here</a>.</p>
+    </div>
+</div>

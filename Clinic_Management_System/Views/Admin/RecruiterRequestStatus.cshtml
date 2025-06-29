@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Clinic_Management_System.Models.RecruiterRequest>
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+<h1 style="margin: 50px;">RecruiterRequestStatus</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestId)
+            </td>
+            <td>
+                 @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+                <td>
+                    <form method="post" asp-action="RecruiterRequestStatus">
+                        <input type="hidden" name="requestId" value="@item.RequestId" />
+                        <select name="newStatus">
+                            <option value="Pending" selected="@("Pending" == item.Status)">Pending</option>
+                            <option value="Approved" selected="@("Approved" == item.Status)">Approved</option>
+                            <option value="Rejected" selected="@("Rejected" == item.Status)">Rejected</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>Action</td>
+        </tr>
+}
+    </tbody>
+</table>

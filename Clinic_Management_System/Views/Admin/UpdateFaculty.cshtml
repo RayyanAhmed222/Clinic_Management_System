@@ -1,0 +1,118 @@
+﻿@model Clinic_Management_System.Models.AddFacultyViewModel
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Update Faculty";
+}
+
+<style>
+    .faculty-form-wrapper {
+        max-width: 480px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+        .faculty-form-wrapper h1,
+        .faculty-form-wrapper h4 {
+            text-align: center;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    .form-control {
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+    .back-link {
+        margin-top: 25px;
+        text-align: center;
+    }
+</style>
+
+<div class="faculty-form-wrapper">
+    <h1>Update Faculty</h1>
+    <h4>Faculty Details</h4>
+    <hr />
+
+    <form asp-action="UpdateFaculty" method="post" enctype="multipart/form-data" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="faculty.FacultyId" />
+
+        <div class="form-group">
+            <label asp-for="faculty.FacultyName">Name</label>
+            <input asp-for="faculty.FacultyName" class="form-control" placeholder="Enter Faculty Name" />
+            <span asp-validation-for="faculty.FacultyName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="faculty.FacultyGender">Gender</label>
+            <input asp-for="faculty.FacultyGender" class="form-control" placeholder="Enter Gender" />
+            <span asp-validation-for="faculty.FacultyGender" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="faculty.FacultyAge">Age</label>
+            <input asp-for="faculty.FacultyAge" class="form-control" placeholder="Enter Age" />
+            <span asp-validation-for="faculty.FacultyAge" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="faculty.FacultyEmail">Email</label>
+            <input asp-for="faculty.FacultyEmail" class="form-control" placeholder="Enter Email" />
+            <span asp-validation-for="faculty.FacultyEmail" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="faculty.FacultyImage">Upload Image</label>
+            <input type="file" name="img" class="form-control" />
+            <span asp-validation-for="faculty.FacultyImage" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="faculty.FacultyQualification">Qualification</label>
+            <input asp-for="faculty.FacultyQualification" class="form-control" placeholder="Enter Qualification" />
+            <span asp-validation-for="faculty.FacultyQualification" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="faculty.FacultySpecialization">Specialization</label>
+            <input asp-for="faculty.FacultySpecialization" class="form-control" placeholder="Enter Specialization" />
+            <span asp-validation-for="faculty.FacultySpecialization" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="faculty.FacultyPhone">Phone</label>
+            <input asp-for="faculty.FacultyPhone" class="form-control" placeholder="Enter Phone Number" />
+            <span asp-validation-for="faculty.FacultyPhone" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+<div class="back-link">
+    <a asp-action="Index" class="btn btn-link mt-3">Back to List</a>
+</div>

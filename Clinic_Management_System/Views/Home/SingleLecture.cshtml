@@ -1,0 +1,37 @@
+﻿@using Clinic_Management_System.Models
+@{
+    ViewData["Title"] = "Lecture Details";
+    var items = ViewBag.Sci as List<Lecture>;
+}
+
+@if (items != null && items.Any())
+{
+    foreach (var item in items)
+    {
+        <div style="margin-top: 100px;" class="single-product">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/@item.LecImg" alt="@item.LecName" class="img-fluid" />
+                </div>
+                <div class="col-md-6">
+                    <h2>@item.LecName</h2>
+                    <p><strong>Description:</strong> @item.LecDescription</p>
+                    <p><strong>Date & Time:</strong> @item.LecDatetime?.ToString("f")</p>
+                    <p><strong>Faculty:</strong> @item.LecFacultyNavigation?.FacultyName</p>
+                    <p><strong>Duration:</strong> @item.LecDuration</p>
+                    <p><strong>Status:</strong> @item.LecStockstatus</p>
+                    <p><strong>Price:</strong> @item.LecPrice?.ToString("C")</p>
+                    <form asp-action="AddToCart" method="post">
+                        <input type="hidden" name="id" value="@item.LecId" />
+                        <input type="number" name="quantity" value="1" min="1" class="form-control w-25" />
+                        <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No lecture details found.</p>
+}

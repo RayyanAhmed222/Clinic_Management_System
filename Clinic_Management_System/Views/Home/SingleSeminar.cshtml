@@ -1,0 +1,39 @@
+﻿@using Clinic_Management_System.Models
+@{
+    ViewData["Title"] = "Seminar Details";
+    var items = ViewBag.Sem as List<Seminar>;
+}
+
+@if (items != null)
+{
+    foreach (var item in items)
+    {
+        <div style="margin-top: 200px;" class="single-product">
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/@item.SemImg" alt="@item.SemName" class="img-fluid" />
+                </div>
+                <div class="col-md-6">
+                    <h2>@item.SemName</h2>
+                    <p><strong>Description:</strong> @item.SemDescription</p>
+                    <p><strong>Date & Time:</strong> @item.SemDatetime</p>
+                    <p><strong>Category:</strong> @item.SemFacultyNavigation.FacultyName</p>
+                    <p><strong>Date & Time:</strong> @item.SemDuration</p>
+                    <p><strong>Status:</strong> @item.SemStockstatus</p>
+                    <p><strong>Price:</strong> @item.SemPrice</p>
+                    <form asp-action="AddToCart" method="post">
+                        <input type="hidden" name="id" value="@item.SemId" />
+                        <input type="number" name="quantity" value="1" min="1" class="form-control w-25" />
+                        <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No Seminar details found.</p>
+}

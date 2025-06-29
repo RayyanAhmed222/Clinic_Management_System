@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Clinic_Management_System.Models.Seminar>
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+<h1>ShowSem</h1>
+
+<p>
+    <a href="@Url.Action("AddSeminar", "Admin")"
+       style="display: inline-block; padding: 10px 20px; background-color: #343a40; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background-color 0.3s ease;">
+        Add More
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SemImg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SemShortDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SemDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SemDatetime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SemDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SemStockstatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SemPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SemFacultyNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SemName)
+            </td>
+            <td>
+                    <img src="~/@item.SemImg" width="150" height="150" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SemShortDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SemDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SemDatetime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SemDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SemStockstatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SemPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SemFacultyNavigation.FacultyId)
+            </td>
+            <td>
+                    <a asp-controller="Admin" asp-action="UpdateSem" asp-route-id="@item.SemId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SemId">Details</a> |
+                    <a asp-controller="Admin" asp-action="DelSem" asp-route-id="@item.SemId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

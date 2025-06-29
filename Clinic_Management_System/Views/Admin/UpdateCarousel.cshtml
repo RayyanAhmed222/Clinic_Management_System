@@ -1,0 +1,77 @@
+﻿@model Clinic_Management_System.Models.AddCarouselViewModel
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Update Carousel";
+}
+
+
+<style>
+    .carousel-form-wrapper {
+        max-width: 450px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+        .carousel-form-wrapper h1,
+        .carousel-form-wrapper h4 {
+            text-align: center;
+            font-weight: 700;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+    .form-group label,
+    label.control-label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border-radius: 6px;
+        margin-bottom: 15px;
+        padding: 8px 12px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+    .back-link {
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
+
+<div class="carousel-form-wrapper">
+    <h1>Update Carousel</h1>
+    <h4>Carousel Image</h4>
+    <hr />
+
+    <form asp-action="UpdateCarousel" method="post" enctype="multipart/form-data" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="Carousel.CarouselId" />
+
+        <div class="form-group">
+            <label asp-for="Carousel.CarouselImg" class="control-label">Upload New Image</label>
+            <input type="file" name="img" class="form-control" />
+            <span asp-validation-for="Carousel.CarouselImg" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+<div class="back-link">
+    <a asp-action="Index" class="btn btn-link mt-3">Back to List</a>
+</div>

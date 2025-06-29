@@ -1,0 +1,175 @@
+﻿@model Clinic_Management_System.Models.AddSeminarViewModel
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Update Seminar";
+}
+
+<style>
+    .update-seminar-wrapper {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 30px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    }
+
+        .update-seminar-wrapper h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #222;
+        }
+
+    hr {
+        margin-bottom: 25px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+        color: #34495e;
+    }
+
+    .form-control, .form-select {
+        width: 100%;
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0,123,255,0.5);
+        }
+
+    .text-danger {
+        font-size: 0.9rem;
+        color: #e74c3c;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: 6px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .back-link {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+        .back-link a {
+            color: #007bff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+            .back-link a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<div class="update-seminar-wrapper">
+    <h1>Update Seminar</h1>
+    <hr />
+
+    <form asp-action="UpdateSem" enctype="multipart/form-data" method="post" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <input type="hidden" asp-for="seminar.SemId" />
+
+        <div class="form-group">
+            <label asp-for="seminar.SemName"></label>
+            <input asp-for="seminar.SemName" class="form-control" placeholder="Enter Seminar Name" />
+            <span asp-validation-for="seminar.SemName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="seminar.SemImg"></label>
+            <input type="file" name="img" class="form-control" />
+            <span asp-validation-for="seminar.SemImg" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="seminar.SemShortDescription"></label>
+            <input asp-for="seminar.SemShortDescription" class="form-control" placeholder="Short Description" />
+            <span asp-validation-for="seminar.SemShortDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="seminar.SemDescription"></label>
+            <input asp-for="seminar.SemDescription" class="form-control" placeholder="Detailed Description" />
+            <span asp-validation-for="seminar.SemDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="seminar.SemDatetime"></label>
+            <input asp-for="seminar.SemDatetime" type="datetime-local" class="form-control" />
+            <span asp-validation-for="seminar.SemDatetime" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="seminar.SemDuration"></label>
+            <input asp-for="seminar.SemDuration" class="form-control" placeholder="Duration (e.g., 2 hours)" />
+            <span asp-validation-for="seminar.SemDuration" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="seminar.SemStockstatus" class="form-label">Stock Status</label>
+            <select asp-for="seminar.SemStockstatus" class="form-select">
+                <option value="Available">Available</option>
+                <option value="Out of Stock">Out of Stock</option>
+            </select>
+            <span asp-validation-for="seminar.SemStockstatus" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="seminar.SemPrice"></label>
+            <input asp-for="seminar.SemPrice" class="form-control" placeholder="Price" />
+            <span asp-validation-for="seminar.SemPrice" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="seminar.SemFaculty"></label>
+            <select asp-for="seminar.SemFaculty" class="form-control" asp-items="ViewBag.SemFaculty">
+                @foreach (var item in Model.FacultyList)
+                {
+                    <option value="@item.FacultyId">@item.FacultyName</option>
+                }
+            </select>
+            <span asp-validation-for="seminar.SemFaculty" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div class="back-link">
+    <a asp-action="Index">Back to List</a>
+</div>

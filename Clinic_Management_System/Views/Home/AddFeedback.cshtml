@@ -1,0 +1,95 @@
+﻿@model Clinic_Management_System.Models.Feedback
+
+@{
+    ViewData["Title"] = "Add Feedback";
+}
+
+<style>
+    .feedback-form-wrapper {
+        max-width: 480px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+        .feedback-form-wrapper h1,
+        .feedback-form-wrapper h4 {
+            text-align: center;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+    .form-group label,
+    .form-label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    .form-control, .form-select {
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+    .back-link {
+        margin-top: 25px;
+        text-align: center;
+    }
+</style>
+
+<div class="feedback-form-wrapper">
+    <h1>Add Feedback</h1>
+    <h4>Feedback Details</h4>
+    <hr />
+
+    <form asp-action="AddFeedback" method="post" enctype="multipart/form-data" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group">
+            <label asp-for="ClientName">Client Name</label>
+            <input asp-for="ClientName" class="form-control" placeholder="Enter your name" />
+            <span asp-validation-for="ClientName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ProductName">Product Name</label>
+            <input asp-for="ProductName" class="form-control" placeholder="Enter product name" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ProductImg">Upload Product Image</label>
+            <input type="file" name="img" class="form-control" />
+            <span asp-validation-for="ProductImg" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ClientFeedback">Your Feedback</label>
+            <input asp-for="ClientFeedback" class="form-control" placeholder="Write your feedback here" />
+            <span asp-validation-for="ClientFeedback" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div class="back-link">
+    <a asp-action="Index" class="btn btn-link">Back to List</a>
+</div>

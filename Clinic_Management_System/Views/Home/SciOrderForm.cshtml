@@ -1,0 +1,71 @@
+﻿@model Clinic_Management_System.Models.OrderScientificFormViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Scientific Machine Order";
+
+    // Use dynamic for cleaner inline expressions
+    dynamic item = Model.Type == "Sell" ? Model.SellScientific : Model.Scientific;
+}
+
+@if (Model.BankDetails != null && Model.BankDetails.Any())
+{
+    <div class="card mb-4 shadow-sm border-primary-custom" style="margin-top: 50px;">
+        <div class="card-header bg-primary-custom" style="background: #3E8DA8; color: white;">
+            <h5 class="mb-0">Bank Details for Payment</h5>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                @foreach (var bank in Model.BankDetails)
+                {
+                    <li class="list-group-item">
+                        <strong>@bank.AccName</strong><br />
+                        IBAN/NUMBER: <code>@bank.AccNumber</code>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+<h2 class="mb-4">Confirm Your Scientific Machine Order</h2>
+
+<form asp-action="SciOrderForm" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" name="SciId" value="@item.ScientificId" />
+    <input type="hidden" name="Type" value="@Model.Type" />
+
+    <div class="mb-3">
+        <label class="form-label">Scientific Machine Name</label>
+        <input class="form-control" value="@item.ScientificName" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <input class="form-control" value="@item.ScientificCatNavigation?.SciCatName" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input class="form-control" value="@item.ScientificPrice" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ScientificOrder.UserEmail" class="form-label">Email</label>
+        <input asp-for="ScientificOrder.UserEmail" class="form-control" />
+        <span asp-validation-for="ScientificOrder.UserEmail" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ScientificOrder.UserAddress" class="form-label">Address</label>
+        <textarea asp-for="ScientificOrder.UserAddress" class="form-control"></textarea>
+        <span asp-validation-for="ScientificOrder.UserAddress" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ScientificOrder.TransactionScreenshot" class="form-label">Transaction Screenshot</label>
+        <input type="file" name="TransactionScreenshot" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Place Order</button>
+</form>

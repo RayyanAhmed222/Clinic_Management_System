@@ -1,0 +1,119 @@
+﻿@model Clinic_Management_System.Models.AddSciViewModel
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Update Scientific Category";
+}
+
+<style>
+    .sci-cat-form-wrapper {
+        max-width: 480px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+        .sci-cat-form-wrapper h1 {
+            text-align: center;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+    hr {
+        margin-bottom: 25px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+        color: #34495e;
+    }
+
+    .form-control {
+        width: 100%;
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0,123,255,0.5);
+        }
+
+    .text-danger {
+        font-size: 0.9rem;
+        color: #e74c3c;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: 6px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .back-link {
+        margin-top: 25px;
+        text-align: center;
+    }
+
+        .back-link a {
+            color: #007bff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+            .back-link a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<div class="sci-cat-form-wrapper">
+    <h1>Update Scientific Category</h1>
+    <hr />
+
+    <form asp-action="UpdateScientificCategory" method="post" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <input type="hidden" asp-for="SelectedCategory.SciCatId" />
+
+        <div class="form-group">
+            <label asp-for="SelectedCategory.SciCatName"></label>
+            <input asp-for="SelectedCategory.SciCatName" class="form-control" placeholder="Enter Scientific Category Name" />
+            <span asp-validation-for="SelectedCategory.SciCatName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div class="back-link">
+    <a asp-action="ShowScientificCategory">Back to List</a>
+</div>

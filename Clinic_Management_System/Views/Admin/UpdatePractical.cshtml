@@ -1,0 +1,189 @@
+﻿@model Clinic_Management_System.Models.AddParcViewModel
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Update Practical";
+}
+
+<style>
+    .practical-form-wrapper {
+        max-width: 480px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+        .practical-form-wrapper h1,
+        .practical-form-wrapper h4 {
+            text-align: center;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 12px;
+        }
+
+    hr {
+        margin-bottom: 25px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+        color: #34495e;
+    }
+
+    .form-control {
+        width: 100%;
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0,123,255,0.5);
+        }
+
+    input[type="file"].form-control {
+        padding: 6px 12px;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+        color: #e74c3c;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: 6px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .back-link {
+        margin-top: 25px;
+        text-align: center;
+    }
+
+        .back-link a {
+            color: #007bff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+            .back-link a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<div class="practical-form-wrapper">
+    <h1>Update Practical</h1>
+    <h4>Practical</h4>
+    <hr />
+
+    <form asp-action="UpdatePractical" method="post" enctype="multipart/form-data" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <input type="hidden" asp-for="practical.PracId" />
+
+        <div class="form-group">
+            <label asp-for="practical.PracName"></label>
+            <input asp-for="practical.PracName" class="form-control" />
+            <span asp-validation-for="practical.PracName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracImg"></label>
+            <input type="file" name="img" class="form-control" />
+            <span asp-validation-for="practical.PracImg" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracShortDescription"></label>
+            <input asp-for="practical.PracShortDescription" class="form-control" />
+            <span asp-validation-for="practical.PracShortDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracDescription"></label>
+            <input asp-for="practical.PracDescription" class="form-control" />
+            <span asp-validation-for="practical.PracDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracDatetime"></label>
+            <input asp-for="practical.PracDatetime" class="form-control" />
+            <span asp-validation-for="practical.PracDatetime" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.ParcDuration"></label>
+            <input asp-for="practical.ParcDuration" class="form-control" />
+            <span asp-validation-for="practical.ParcDuration" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracPrice"></label>
+            <input asp-for="practical.PracPrice" class="form-control" />
+            <span asp-validation-for="practical.PracPrice" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracStockstatus"></label>
+            <input asp-for="practical.PracStockstatus" class="form-control" />
+            <span asp-validation-for="practical.PracStockstatus" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracticalFaculty"></label>
+            <select asp-for="practical.PracticalFaculty" class="form-control" asp-items="ViewBag.PracticalFaculty">
+                @foreach (var item in Model.FacultyList)
+                {
+                    <option value="@item.FacultyId">@item.FacultyName</option>
+                }
+            </select>
+            <span asp-validation-for="practical.PracticalFaculty" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="practical.PracticalCategory"></label>
+            <select asp-for="practical.PracticalCategory" class="form-control" asp-items="ViewBag.PracticalCategory">
+                @foreach (var item in Model.pracList)
+                {
+                    <option value="@item.PracCatId">@item.PracCatName</option>
+                }
+            </select>
+            <span asp-validation-for="practical.PracticalCategory" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div class="back-link">
+    <a asp-action="Index">Back to List</a>
+</div>

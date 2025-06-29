@@ -1,0 +1,111 @@
+﻿@model Clinic_Management_System.Models.AddMedViewModel
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewData["Title"] = "Add Medicine";
+}
+
+<style>
+    .medicine-form-wrapper {
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+        .medicine-form-wrapper h1,
+        .medicine-form-wrapper h4 {
+            text-align: center;
+            font-weight: 700;
+            color: #343a40;
+        }
+
+    .form-group label,
+    label.form-label {
+        font-weight: 600;
+    }
+
+    .form-control, .form-select {
+        border-radius: 6px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .back-link {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="medicine-form-wrapper">
+    <h1>Add Medicine</h1>
+    <h4 class="mb-4">Medicines Info</h4>
+    <hr />
+
+    <form asp-action="AddMed" method="post" enctype="multipart/form-data" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group mb-3">
+            <label asp-for="medicineinfo.MedName" class="form-label">Medicine Name</label>
+            <input asp-for="medicineinfo.MedName" class="form-control" placeholder="Enter medicine name" />
+            <span asp-validation-for="medicineinfo.MedName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="medicineinfo.MedDescription" class="form-label">Description</label>
+            <textarea asp-for="medicineinfo.MedDescription" class="form-control" rows="3" placeholder="Enter description"></textarea>
+            <span asp-validation-for="medicineinfo.MedDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="medicineinfo.MedImage" class="form-label">Upload Image</label>
+            <input type="file" name="img" class="form-control" />
+            <span asp-validation-for="medicineinfo.MedImage" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="medicineinfo.MedPrice" class="form-label">Price</label>
+            <input asp-for="medicineinfo.MedPrice" class="form-control" type="number" step="0.01" min="0" placeholder="Enter price" />
+            <span asp-validation-for="medicineinfo.MedPrice" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="medicineinfo.MedCat" class="form-label">Category</label>
+            <select asp-for="medicineinfo.MedCat" class="form-select" required>
+                <option value="">-- Select Category --</option>
+                @foreach (var item in Model.MedCategoryList)
+                {
+                    <option value="@item.MedCatId">@item.MedCatName</option>
+                }
+            </select>
+            <span asp-validation-for="medicineinfo.MedCat" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label asp-for="medicineinfo.StockStatus" class="form-label">Stock Status</label>
+            <select asp-for="medicineinfo.StockStatus" class="form-select" required>
+                <option value="">-- Select Status --</option>
+                <option value="Available">Available</option>
+                <option value="Out of Stock">Out of Stock</option>
+            </select>
+            <span asp-validation-for="medicineinfo.StockStatus" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+
+    <div class="back-link">
+        <a asp-action="Index" class="btn btn-link">Back to List</a>
+    </div>
+</div>
